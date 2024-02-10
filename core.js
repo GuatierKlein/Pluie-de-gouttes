@@ -72,7 +72,7 @@ function addUrineLevel(amount) {
 
 function tick() {
     ticks++
-    if(ticks % 10 == 0) {
+    if(ticks % 25 == 0) {
         ticks = 0
         addUrineLevel(1)
     }
