@@ -4,6 +4,8 @@ let pipiCounter = 0
 createFrame(100, 100)
 setInterval(() => tick(), 50)
 
+document.getElementById("button").onclick = () => applyBackground()
+
 function createFrame(width, height) {
     const frame = document.getElementById("frame")
     console.log(frame)
@@ -49,3 +51,8 @@ function tick() {
     }
 }
 
+function applyBackground() {
+    const url = document.getElementById("pictureInput").value
+    document.getElementById("frame").style.backgroundImage = `url(${url})`
+
+}
