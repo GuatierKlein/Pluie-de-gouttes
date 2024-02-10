@@ -32,6 +32,8 @@ function createFrame(width, height) {
     }
 }
 
+//louis ta race
+
 function tick() {
     console.log("tick")
     for (let i = pixelMatrix.length - 1; i >= 0; i--) {
