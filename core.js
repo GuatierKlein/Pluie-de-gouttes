@@ -56,5 +56,5 @@ function tick() {
 function applyBackground() {
     const url = document.getElementById("pictureInput").value
     document.getElementById("frame").style.backgroundImage = `url(${url})`
-
+    console.log(url)
 }
