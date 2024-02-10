@@ -14,12 +14,22 @@ body {
     background-image: url("image.jpg");
     width: 500px;
     height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #game {
     position: relative;
     display: flex;
     gap: 100px;
+}
+
+#bottlePic {
+    position: relative;
+    height: 100%;
+    background-image: url("https://media.maxiburo.fr/j2svp/zoom/00/56/00564.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #bladder {

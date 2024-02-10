@@ -63,8 +63,11 @@ function removeMouseInterval() {
 }
 
 function addUrineLevel(amount) {
-    if(urineLevel + amount < 0 || urineLevel + amount > 100) return
-    urineLevel += amount
+    if(urineLevel + amount < 0 || urineLevel + amount > 100) {
+        urineLevel = 100
+    } else {
+        urineLevel += amount
+    }
     urinePool.style.height = `${(urineLevel / 100) * 500}px` 
 }
 
