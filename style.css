@@ -16,6 +16,29 @@ body {
     height: 500px;
 }
 
+#game {
+    position: relative;
+    display: flex;
+    gap: 100px;
+}
+
+#bladder {
+    position: relative;
+    border: solid 2px black;
+    border-top: 0px;
+    width: 250px;
+    height: 500px;
+    display: flex;
+    align-items: flex-end;
+}
+
+#urine {
+    position: relative;
+    background-color: rgb(255,220,101);
+    width: 250px;
+    height: 0px;
+}
+
 .pixelLine {
     position: relative;
     display: flex;
