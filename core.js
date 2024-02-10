@@ -1,10 +1,9 @@
 const pixelMatrix = new Array()
 let pipiCounter = 0
 
+document.getElementById("button").onclick = () => applyBackground()
 createFrame(100, 100)
 setInterval(() => tick(), 50)
-
-document.getElementById("button").onclick = () => applyBackground()
 
 function createFrame(width, height) {
     const frame = document.getElementById("frame")
@@ -54,6 +53,7 @@ function tick() {
 }
 
 function applyBackground() {
+    console.log("test")
     const url = document.getElementById("pictureInput").value
     document.getElementById("frame").style.backgroundImage = `url(${url})`
     console.log(url)
