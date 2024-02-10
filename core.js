@@ -32,8 +32,8 @@ function createFrame(width, height) {
 
 function tick() {
     console.log("tick")
-    for (let i = pixelMatrix.length - 1; i > 0; i--) {
-        for (let j = pixelMatrix[i].length - 1; j > 0; j--) {
+    for (let i = pixelMatrix.length - 1; i >= 0; i--) {
+        for (let j = pixelMatrix[i].length - 1; j >= 0; j--) {
             if(!pixelMatrix[i][j].touched) continue 
 
             //au sol 
