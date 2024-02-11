@@ -227,7 +227,6 @@ function unTouchPixel(pixel) {
 }
 
 function applyBackground() {
-    console.log("test")
     const url = document.getElementById("pictureInput").value
     document.getElementById("frame").style.backgroundImage = `url(${url})`
     console.log(url)
@@ -246,26 +245,18 @@ function initBottle() {
 }
 
 function getRandomYellow() {
-    let r = 255
-    let g = 220
-    let b = 101
-    const rDelta = Math.random() * 15
-    const gDelta = Math.random() * 15
-    const bDelta = Math.random() * 15
-    if(Math.random() > 0.5) {
-        r += rDelta
-    } else {
-        r -= rDelta
-    }
-    if(Math.random() > 0.5) {
-        g += gDelta
-    } else {
-        g -= gDelta
-    }
-    if(Math.random() > 0.5) {
-        b += bDelta
-    } else {
-        b -= bDelta
-    }
-    return `rgb(${r}, ${g}, ${b})`
+    const baseR = 255;
+    const baseG = 220;
+    const baseB = 101;
+    const delta = 15;
+
+    const rDelta = (Math.random() > 0.5 ? 1 : -1) * Math.random() * delta;
+    const gDelta = (Math.random() > 0.5 ? 1 : -1) * Math.random() * delta;
+    const bDelta = (Math.random() > 0.5 ? 1 : -1) * Math.random() * delta;
+
+    const r = Math.min(255, Math.max(0, baseR + rDelta));
+    const g = Math.min(255, Math.max(0, baseG + gDelta));
+    const b = Math.min(255, Math.max(0, baseB + bDelta));
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
