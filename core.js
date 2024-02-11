@@ -4,6 +4,8 @@ let mouseTimeOut
 const urinePool = document.getElementById("urine")
 let urineLevel = 0
 let ticks = 0;
+let isPeeing = false
+var peeAudio = new Audio('pee.mp3');
 
 document.getElementById("button").onclick = () => applyBackground()
 initBottle()
@@ -11,7 +13,10 @@ addUrineLevel(100)
 createFrame(100, 100)
 setInterval(() => tick(), 50)
 
-document.body.addEventListener("mouseup", removeMouseInterval)
+document.body.addEventListener("mouseup", mouseUp)
+document.body.addEventListener("mousedown", mouseDown)
+
+
 
 function createFrame(width, height) {
     const frame = document.getElementById("frame")
@@ -30,37 +35,58 @@ function createFrame(width, height) {
             pixel.locked = false
             pixel.new = false
             pixel.beingClicked = false
+            pixel.i = i
+            pixel.j = j
 
-            pixel.addEventListener("mousedown", (e) => {
-                let occCounter = 0
-                mouseTimeOut = setInterval(() => {
-                    occCounter++
-                    if(occCounter > 20) return
-                    mouseDown(e.target)
-                }, 100);
+            pixel.addEventListener("mouseover", (e) => {
+                if(!isPeeing) return
+                pee(e.target)
             })
         } 
         pixelMatrix.push(pixelVector)   
     }
 }
 
-function mouseDown(pixel) {
-    if(urineLevel <= 0) return
+function pee(pixel) {
+    if(urineLevel <= 0) {
+        peeAudio.pause();
+        peeAudio.currentTime = 0;
+        return
+    }
     pixel.beingClicked = true
     pipiCounter++
     document.getElementById("counter").innerHTML = pipiCounter
-    touchPixel(pixel, false)
-    addUrineLevel(-1)
-    fun()
+    const i = pixel.i 
+    const j = pixel.j 
+    if(Math.random() > 0.25) {
+        touchPixel(pixel, false)
+    }
+    if(i != 0 && Math.random() > 0.9) {
+        touchPixel(pixelMatrix[i - 1][j])
+    }
+    if(i != pixelMatrix[i].length - 1 && Math.random() > 0.9) {
+        touchPixel(pixelMatrix[i + 1][j])
+    }
+    if(j != 0 && Math.random() > 0.9) {
+        touchPixel(pixelMatrix[i][j - 1])
+    }
+    if(j != pixelMatrix[i].length - 1 && Math.random() > 0.9) {
+        touchPixel(pixelMatrix[i][j + 1])
+    }
+    addUrineLevel(-0.5)
 }
 
-function mouseUp(pixel) {
-    pixel.beingClicked = false
+function mouseDown() {
+    isPeeing = true
+    peeAudio.play();
 }
 
-function removeMouseInterval() {
+function mouseUp() {
+    isPeeing = false
     if(mouseTimeOut) window.clearInterval(mouseTimeOut)
     mouseTimeOut = false
+    peeAudio.pause();
+    peeAudio.currentTime = 0;
 }
 
 function addUrineLevel(amount) {
@@ -91,6 +117,7 @@ function tick() {
     if(ticks % 25 == 0) {
         ticks = 0
         addUrineLevel(1)
+        fun()
     }
     
     for (let i = pixelMatrix.length - 1; i >= 0; i--) {
@@ -187,7 +214,7 @@ function lockPixel(pixel) {
 function touchPixel(pixel, isNew) {
     pixel.touched = true 
     pixel.new = isNew
-    pixel.style.backgroundColor = "rgb(255,220,101)";
+    pixel.style.backgroundColor = getRandomYellow();
 }
 function unTouchPixel(pixel) {
     pixel.touched = false 
@@ -205,8 +232,35 @@ function initBottle() {
     const bottle = document.getElementById("bottle")
     bottle.addEventListener("click", () => {
         addUrineLevel(10)
-        if(Math.random() < 0.05) {
+        var audio = new Audio('drink.mp3');
+        audio.play();
+        if(Math.random() < 0.025) {
             window.open("https://www.youtube.com/watch?v=NTQQtsaIfpo", "_blank")
         }
     })
+}
+
+function getRandomYellow() {
+    let r = 255
+    let g = 220
+    let b = 101
+    const rDelta = Math.random() * 15
+    const gDelta = Math.random() * 15
+    const bDelta = Math.random() * 15
+    if(Math.random() > 0.5) {
+        r += rDelta
+    } else {
+        r -= rDelta
+    }
+    if(Math.random() > 0.5) {
+        g += gDelta
+    } else {
+        g -= gDelta
+    }
+    if(Math.random() > 0.5) {
+        b += bDelta
+    } else {
+        b -= bDelta
+    }
+    return `rgb(${r}, ${g}, ${b})`
 }
