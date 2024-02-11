@@ -111,7 +111,7 @@ function fun() {
 }
 
 function getRandomFunImage() {
-    const images = ["wc.png", "fun.png", "brosse.png"]
+    const images = ["wc.png", "fun.png", "brosse.png", "bottle.png", "dog.png", "dog2.png"]
     return images[Math.floor(Math.random() * images.length)]
 }
 
