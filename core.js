@@ -91,7 +91,7 @@ function mouseUp() {
 
 function addUrineLevel(amount) {
     if(urineLevel + amount < 0 || urineLevel + amount > 100) {
-        urineLevel = 100
+        urineLevel = urineLevel + amount > 100 ? 100 : 0
     } else {
         urineLevel += amount
     }
@@ -149,11 +149,6 @@ function tick() {
             touchPixel(pixelMatrix[i + 1][j], false)
         }
     }
-}
-
-function flowToSide(i, j) {
-
-    return true
 }
 
 function flowToClosestEmpty(iStart, jStart) {
