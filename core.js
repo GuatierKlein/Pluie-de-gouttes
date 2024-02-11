@@ -100,7 +100,7 @@ function addUrineLevel(amount) {
 
 function fun() {
     const img = document.createElement("img")
-    img.src = "fun.png"
+    img.src = getRandomFunImage()
     img.style.height="100px"
     img.className = "fun fall"
     img.style.left = `${Math.random() * 100}%`
@@ -108,6 +108,11 @@ function fun() {
     setTimeout(() => {
         img.remove()
     }, 2000)
+}
+
+function getRandomFunImage() {
+    const images = ["wc.png", "fun.png", "brosse.png"]
+    return images[Math.floor(Math.random() * images.length)]
 }
 
 //louis ta race
