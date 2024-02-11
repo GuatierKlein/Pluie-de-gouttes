@@ -230,6 +230,10 @@ function applyBackground() {
 function initBottle() {
     const bottle = document.getElementById("bottle")
     bottle.addEventListener("click", () => {
+        const bottle = document.getElementById("bottlePic")
+        bottle.classList.remove("shake")
+        bottle.offsetWidth;
+        bottle.classList.add("shake")
         addUrineLevel(10)
         var audio = new Audio('drink.mp3');
         audio.play();
