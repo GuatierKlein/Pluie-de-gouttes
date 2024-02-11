@@ -51,6 +51,7 @@ function mouseDown(pixel) {
     document.getElementById("counter").innerHTML = pipiCounter
     touchPixel(pixel, false)
     addUrineLevel(-1)
+    fun()
 }
 
 function mouseUp(pixel) {
@@ -69,6 +70,18 @@ function addUrineLevel(amount) {
         urineLevel += amount
     }
     urinePool.style.height = `${(urineLevel / 100) * 500}px` 
+}
+
+function fun() {
+    const img = document.createElement("img")
+    img.src = "fun.png"
+    img.style.height="100px"
+    img.className = "fun fall"
+    img.style.left = `${Math.random() * 100}%`
+    document.getElementById("global").appendChild(img)
+    setTimeout(() => {
+        img.remove()
+    }, 2000)
 }
 
 //louis ta race
